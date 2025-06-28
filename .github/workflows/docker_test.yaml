@@ -6,24 +6,49 @@ on:
   workflow_dispatch:
 
 jobs:
-  basic-one:
+  terrafom_plan:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: docker build
+      - name: terraform init
+        working-directory: ${{ github.workspace }}/terraform
         run: |
-          docker build . -t test
+          terraform init
+          terraform plan
+          #terraform apply
 
-      - name: list of docker images
-        run: docker images
+  terraform_apply:
+    runs-on: ubuntu-latest
+    env: terrform_apply
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
 
-      - name: run docker image
-        run: docker run test
+      - name: terraform init
+        working-directory: ${{ github.workspace }}/terraform
+        run: |
+          terraform init
+          terraform plan
+          terraform apply
 
-      - name: get status
-        if: ${{ 
+          
+
+
+
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
+
+      # - name: docker build
+      #   run: |
+      #     docker build . -t test
+
+      # - name: list of docker images
+      #   run: docker images
+
+      # - name: run docker image
+      #   run: docker run test
+
+
+
