@@ -19,9 +19,8 @@ jobs:
         run: |
           docker build . -t test
 
-      # - name: Build and push
-      #   uses: docker/build-push-action@v6
-      #   with:
-      #     push: false
-      #     tags: user/app:latest
-      #     file: .
+      - name: list of docker images
+        run: docker images
+
+      - name: run docker image
+        run: docker run test
