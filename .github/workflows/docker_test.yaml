@@ -24,3 +24,6 @@ jobs:
 
       - name: run docker image
         run: docker run test
+
+      - name: get status
+        if: ${{ 
