@@ -1,0 +1,20 @@
+name: basic-workflow
+
+#run-name:
+
+on:
+  workflow_dispatch:
+    inputs:
+      var-name:
+        description: justicstion
+        type: string
+        required: false
+        default: ''
+
+jobs:
+  basic-one:
+    runs-on: ubuntu-latest  #/ windows-latest
+     #groups: group_name
+    outputs:
+      var1: ${{ steps.var_out.outputs.var1 }}
+      var2: ${{ steps.var_out.outputs.var2 }}
