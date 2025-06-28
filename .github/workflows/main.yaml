@@ -1,0 +1,64 @@
+name: basic-workflow
+
+#run-name:
+
+on:
+  workflow_dispatch:
+    inputs:
+      var-name:
+        description: justicstion
+        type: string
+        required: false
+        default: ''
+
+jobs:
+  basic-one:
+    runs-on: ubuntu-latest  #/ windows-latest
+     #groups: group_name
+    outputs:
+      var1: ${{ steps.var_out.outputs.var1 }}
+      var2: ${{ steps.var_out.outputs.var2 }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        # with:
+          # repository: <org_name>/<repo_name>
+          # token: < PAT >
+          # ref: test_branch
+          # path: env
+
+      - name: create env varible and output
+        id: var_out
+        shell: bash
+        run: |
+          echo "var1=one" >> $GITHUB_ENV
+          echo "var1=one" >> $GITHUB_OUTPUT
+          echo "var2=two" >> $GITHUB_ENV
+          echo "var2=two" >> $GITHUB_OUTPUT
+
+      - name: print env variable
+        shell: bash
+        run: |
+          echo "${{ env.var1 }}"
+          echo "${{ env.var2 }}"
+
+  base-two:
+    runs-on: ubuntu-latest
+    needs: basic-one
+      # matrix:
+      #   stratagey:
+      #     arch: [ 32 , 64 ]
+    steps:
+      - name: display var value
+        run: |
+          echo "${{ needs.basic-one.outputs.var1 }}"
+          echo "${{ needs.basic-one.outputs.var2 }}"
+          # echo "${{ arch.MATRIX }}
+          
+
+          
+
+        
+        
+        
+  
