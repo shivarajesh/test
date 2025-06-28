@@ -1,9 +1,7 @@
-FROM: python:3
-MKDIR app
-WORKDIR app
-COPY hello.py app/
+FROM python:3
+COPY hello.py .
 
-CMD [ "python", "app/hello.py" ]
+CMD [ "python", "hello.py" ]
 
 
 
