@@ -20,3 +20,4 @@ jobs:
         with:
           push: false
           tags: user/app:latest
+          file: .
